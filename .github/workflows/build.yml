@@ -28,6 +28,9 @@ jobs:
           username: ${{ secrets.aliyun_cs_username }}
           password: ${{ secrets.aliyun_cs_password }}
 
+      - name: Set env
+        run: export WWWGROUP=${WWWGROUP:-$(id -g)}
+
       - name: Build and push
         uses: docker/build-push-action@v6.5.0
         with:
