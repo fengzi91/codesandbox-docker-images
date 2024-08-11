@@ -8,6 +8,10 @@ on:
 jobs:
   build-laravel-image:
     runs-on: ubuntu-latest
+
+    env:
+      WWWGROUP: 1001
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -35,6 +39,8 @@ jobs:
         uses: docker/build-push-action@v6.5.0
         with:
           platforms: linux/amd64
+          build-args: |
+            WWWGROUP=${{ env.WWWGROUP }}
           push: true
           context: ./laravel/8.3
           tags: |
